@@ -1,0 +1,432 @@
+<think>
+First, the user says: "remake and add black colour not purple"
+
+
+## Interpreting user request  
+- The user wants the website redesigned with black as the primary color, replacing the current purple theme.  
+- Specific purple elements mentioned include gradients and accents like #667eea.
+</think>```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNC Tech - Buy Pendrives, SSDs & HDDs</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            overflow-x: hidden;
+            animation: backgroundShift 10s ease-in-out infinite alternate;
+        }
+        @keyframes backgroundShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Floating elements for extra animation */
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255,255,255,0.3);
+            animation: float 6s ease-in-out infinite;
+            z-index: -1;
+        }
+        .floating-icon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { top: 20%; right: 15%; animation-delay: 2s; }
+        .floating-icon:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            animation: slideDownBounce 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        @keyframes slideDownBounce {
+            0% { transform: translateY(-100%); }
+            60% { transform: translateY(10%); }
+            100% { transform: translateY(0); }
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #000000;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 2rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+        }
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #000000;
+            transition: width 0.4s;
+        }
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        nav ul li a:hover {
+            color: #000000;
+            transform: translateY(-3px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1200&h=800&fit=crop') no-repeat center center/cover;
+            z-index: -1;
+            animation: zoomInRotate 3s ease-out;
+        }
+        @keyframes zoomInRotate {
+            0% { transform: scale(1.5) rotate(5deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUpBounce 2s ease-out 0.5s both;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        @keyframes fadeInUpBounce {
+            0% { opacity: 0; transform: translateY(50px); }
+            60% { opacity: 1; transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUpBounce 2s ease-out 1s both;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #000000, #333333);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.4s;
+            animation: fadeInUpBounce 2s ease-out 1.5s both;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .btn:hover {
+            background: linear-gradient(45deg, #333333, #000000);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        /* Products Section */
+        .products {
+            padding: 5rem 0;
+            background: white;
+            position: relative;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            animation: fadeInScale 1.5s ease-out;
+        }
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .product {
+            background: #f9f9f9;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: slideUpFlip 1.2s ease-out both;
+            animation-delay: calc(var(--i) * 0.3s);
+            position: relative;
+        }
+        .product:hover {
+            transform: translateY(-15px) rotateY(5deg);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        @keyframes slideUpFlip {
+            0% { opacity: 0; transform: translateY(100px) rotateX(90deg); }
+            100% { opacity: 1; transform: translateY(0) rotateX(0deg); }
+        }
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .product:hover img {
+            transform: scale(1.1) rotate(2deg);
+        }
+        .product-content {
+            padding: 1.5rem;
+        }
+        .product h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+        .product:hover h3 {
+            color: #000000;
+        }
+        .product p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 1rem;
+            animation: priceGlow 2s infinite alternate;
+        }
+        @keyframes priceGlow {
+            0% { text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
+            100% { text-shadow: 0 0 20px rgba(0, 0, 0, 0.8); }
+        }
+        .product .btn {
+            width: 100%;
+            text-align: center;
+            border-radius: 25px;
+        }
+
+        /* Footer */
+        footer {
+            background: #000000;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            animation: fadeInSlideUp 1s ease-out;
+        }
+        @keyframes fadeInSlideUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            nav ul {
+                flex-direction: column;
+                margin-top: 1rem;
+            }
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            .product:hover {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating icons for animation -->
+    <div class="floating-icon">💾</div>
+    <div class="floating-icon">🔌</div>
+    <div class="floating-icon">💿</div>
+
+    <header>
+        <nav class="container">
+            <div class="logo">SNC Tech</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#pendrives">Pendrives</a></li>
+                <li><a href="#ssds">SSDs</a></li>
+                <li><a href="#hdds">HDDs</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Welcome to SNC Tech</h1>
+            <p>Discover high-quality pendrives, SSDs, and HDDs for all your storage needs.</p>
+            <a href="#pendrives" class="btn">Shop Now</a>
+        </div>
+    </section>
+
+    <section id="pendrives" class="products">
+        <div class="container">
+            <h2 class="section-title">Pendrives</h2>
+            <div class="product-grid">
+                <div class="product" style="--i: 1;">
+                    <img src="https://images.unsplash.com/photo-1625842268584-8f3296236761?w=300&h=200&fit=crop" alt="USB Pendrive 32GB">
+                    <div class="product-content">
+                        <h3>USB Pendrive 32GB</h3>
+                        <p>Fast and reliable USB 3.0 pendrive for everyday use.</p>
+                        <div class="price">$15.99</div>
+                        <a href="#" class="btn">Buy Now</a>
+                    </div>
+                </div>
+                <div class="product" style="--i: 2;">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=200&fit=crop" alt="USB Pendrive 64GB">
+                    <div class="product-content">
+                        <h3>USB Pendrive 64GB</h3>
+                        <p>High-speed transfer with ample storage space.</p>
+                        <div class="price">$24.99</div>
+                        <a href="#" class="btn">Buy Now</a>
+                    </div>
+                </div>
+                <div class="product" style="--i: 3;">
+                    <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=300&h=200&fit=crop" alt="USB Pendrive 128GB">
+                    <div class="product-content">
+                        <h3>USB Pendrive 128GB</h3>
+                        <p>Premium quality for professionals and gamers.</p>
+                        <div class="price">$39.99</div>
+                        <a href="#" class="btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ssds" class="products">
+        <div class="container">
+            <h2 class="section-title">SSDs</h2>
+            <div class="product-grid">
+                <div class="product" style="--i: 1;">
+                    <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=300&h=200&fit=crop" alt="SSD 250GB">
+                    <div class="product-content">
+                        <h3>SSD 250GB</h3>
+                        <p>Lightning-fast boot times and data access.</p>
+                        <div class="price">$49.99</div>
+                        <a href="#" class="btn">Buy Now</a>
+                    </div>
+                </div>
+                <div class="product" style="--i: 2;">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=300&h=200&fit=crop" alt="SSD 500GB">
+                    <div class="product-content">
+                        <h3>SSD 500GB</h3>
+                        <p>Ideal for gaming and multitasking.</p>
+                        <div class="price">$79.99</div>
+                        <a href="#" class="btn">Buy Now</a>
+                    </div>
+                </div>
+                <div class="product" style="--i: 3;">
+                    <img src="https://images.unsplash.com/photo-1625842268584-8f3296236761?w=300&h=200&fit=crop" alt="SSD 1TB">
+                    <div class="product-content">
+                        <h3>SSD 1TB</h3>
+                        <p>Maximum performance for power users.</p>
+                        <div class="price">$129.99</div>
+                        <a href="#" class="btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="hdds" class="products">
+        <div class="container">
+            <h2 class="section-title">HDDs</h2>
+            <div class="product-grid">
+                <div class="product" style="--i: 1;">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=300&h=200&fit=crop" alt="HDD 1TB">
+                    <div class="product-content">
+                        <h3>HDD 1TB</h3>
+                        <p>Reliable storage for large files and backups.</p>
+                        <div class="price">$59.99</div>
+                        <a href="#" class="btn">Buy Now</a>
+                    </div>
+                </div>
+                <div class="product" style="--i: 2;">
+                    <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=300&h=200&fit=crop" alt="HDD 2TB">
+                    <div class="product-content">
+                        <h3>HDD 2TB</h3>
+                        <p>Cost-effective solution for extra space.</p>
+                        <div class="price">$89.99</div>
+                        <a href="#" class="btn">Buy Now</a>
+                    </div>
+                </div>
+                <div class="product" style="--i: 3;">
+                    <img src="https://images.unsplash.com/photo-1625842268584-8f3296236761?w=300&h=200&fit=crop" alt="HDD 4TB">
+                    <div class="product-content">
+                        <h3>HDD 4TB</h3>
+                        <p>High-capacity storage for data centers.</p>
+                        <div class="price">$149.99</div>
+                        <a href="#" class="btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <p>&copy; 2023 SNC Tech. All rights reserved. | Contact: info@snctech.com</p>
+        </div>
+    </footer>
+</body>
+</html>
+```
